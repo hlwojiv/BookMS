@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍列表</title>
+</head>
+<body>
+<h2>书籍列表</h2>
+<a href="{% url 'add_book' %}"><button>新增书籍</button></a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>id</th>
+        <th>书名</th>
+        <th>价格</th>
+        <th>出版日期</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ book.pk }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.price }}</td>
+            <td>{{ book.publisher }}</td>
+            <td>{{ book.pub_date | date:"Y-m-d" }}</td>
+            <td>
+                <a href="{% url 'edit_book' book_id=book.id %}">编辑</a>
+                | <a href="{% url 'del_book' book.id %}">删除</a>
+            </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
